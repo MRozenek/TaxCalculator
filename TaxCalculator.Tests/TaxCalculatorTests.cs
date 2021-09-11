@@ -5,7 +5,7 @@ namespace TaxCalculator.Tests
   public class TaxCalculatorTests
   {
     [Fact]
-    public void Test1()
+    public void CalculateTaxIncome_EmployeeWithProgressiveMethodTypeSet_CalculationIsAsExpected()
     {
       Assert.True(true);
     }

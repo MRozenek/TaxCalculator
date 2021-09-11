@@ -2,15 +2,12 @@
 
 namespace TaxCalculator
 {
-  public class TaxCalculator : ITaxCalculator
+  interface ITaxCalculator
   {
     public void CalculateTaxIncome(
       Employee employee,
       decimal income,
       TaxCalculationPeriod taxCalculationPeriod,
-      TaxAccountingMethodType methodType)
-    {
-      throw new System.NotImplementedException();
-    }
+      TaxAccountingMethodType methodType);
   }
 }
