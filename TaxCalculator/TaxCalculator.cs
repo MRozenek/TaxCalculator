@@ -52,6 +52,13 @@ namespace TaxCalculator
 
     private decimal CalculateProgressiveTaxIncome(TaxCalculationDetails[] income)
     {
+      if (ProgressiveTaxIncomeFirstValueInPercent != 0.00m)
+      {
+        throw new ArgumentException("Progressive tax income calculations are always expecting that there is always some zero percent income up to some limit free of charge. "
+          + $"Set back ProgressiveTaxIncomeFirstValueInPercent within AppSettings.json file to 0.00 from {ProgressiveTaxIncomeFirstValueInPercent}, "
+          + "however if youneed to not use 0.00 rate at all you can set ProgressiveTaxIncomeFirstLimit value to 0.");
+      }
+
       var taxIncome = 0m;
       var currentProgressiveTaxIncomeFirstLimit = ProgressiveTaxIncomeFirstLimit;
 
