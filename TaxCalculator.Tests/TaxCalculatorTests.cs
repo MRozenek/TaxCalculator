@@ -1,19 +1,28 @@
+using TaxCalculator.Models;
 using Xunit;
 
 namespace TaxCalculator.Tests
 {
   public class TaxCalculatorTests
   {
-    [Fact]
-    public void CalculateTaxIncome_EmployeeWithProgressiveMethodTypeSet_CalculationIsAsExpected()
+    private TaxCalculator _cut;
+
+    public TaxCalculatorTests()
     {
-      Assert.True(true);
+      _cut = new TaxCalculator();
     }
 
     [Fact]
-    public void Test2()
+    public void CalculateTaxIncome_MethodIsProgressiveAndOne5000Payment_ExpectedCalculationResult()
     {
-      Assert.True(false);
+      var expectedTaxCalculationResult = 324m;
+      TaxCalculationDetails[] taxIncomes = new TaxCalculationDetails[] {
+        new TaxCalculationDetails { Amount = 5000m, Month = 1, Year = 2021 }
+      };
+
+      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, Models.TaxAccountingMethodType.Progressive);
+
+      Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
   }
 }

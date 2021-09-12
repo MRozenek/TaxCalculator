@@ -4,11 +4,7 @@ namespace TaxCalculator
 {
   public class TaxCalculator : ITaxCalculator
   {
-    public void CalculateTaxIncome(
-      Employee employee,
-      decimal income,
-      TaxCalculationPeriod taxCalculationPeriod,
-      TaxAccountingMethodType methodType)
+    public decimal CalculateTaxIncome(TaxCalculationDetails[] income, TaxAccountingMethodType methodType)
     {
       throw new System.NotImplementedException();
     }
