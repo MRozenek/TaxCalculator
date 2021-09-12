@@ -64,6 +64,12 @@ namespace TaxCalculator
 
       foreach (var item in income)
       {
+        if (item.Amount < currentProgressiveTaxIncomeFirstLimit)
+        {
+          currentProgressiveTaxIncomeFirstLimit -= item.Amount;
+          continue;
+        }
+
         taxIncome += item.Amount * ProgressiveTaxIncomeSecondValueInPercent;
         taxIncome -= currentProgressiveTaxIncomeFirstLimit;
         currentProgressiveTaxIncomeFirstLimit = 0m;

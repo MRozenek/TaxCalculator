@@ -54,6 +54,33 @@ namespace TaxCalculator.Tests
     }
 
     [Fact]
+    public void CalculateTaxIncome_ProgressiveTaxMethodAndOne300Payment_ExpectedCalculationResult()
+    {
+      var expectedTaxCalculationResult = 0m;
+      TaxCalculationDetails[] taxIncomes = new TaxCalculationDetails[] {
+        new TaxCalculationDetails { Amount = 300, Month = 1, Year = 2021 },
+      };
+
+      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+
+      Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
+    }
+
+    [Fact]
+    public void CalculateTaxIncome_ProgressiveTaxMethodAndOne300And200Payment_ExpectedCalculationResult()
+    {
+      var expectedTaxCalculationResult = 0m;
+      TaxCalculationDetails[] taxIncomes = new TaxCalculationDetails[] {
+        new TaxCalculationDetails { Amount = 300, Month = 1, Year = 2021 },
+        new TaxCalculationDetails { Amount = 200, Month = 2, Year = 2021 },
+      };
+
+      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+
+      Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
+    }
+
+    [Fact]
     public void CalculateTaxIncome_ProgressiveTaxMethodAndTwo5k5kPayments_ExpectedCalculationResult()
     {
       var expectedTaxCalculationResult = 1174m;
