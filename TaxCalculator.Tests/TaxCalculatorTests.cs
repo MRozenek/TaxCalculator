@@ -10,7 +10,6 @@ namespace TaxCalculator.Tests
 
     public TaxCalculatorTests()
     {
-      //var config = new ConfigurationBuilder().AddJsonFile("AppSettings.json").Build();
       _cut = new TaxCalculator();
     }
 
@@ -23,7 +22,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5000m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, Models.TaxAccountingMethodType.Free);
+      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Free);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -37,7 +36,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5001m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, Models.TaxAccountingMethodType.Flat);
+      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Flat);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -50,7 +49,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5000m, Month = 1, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, Models.TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
