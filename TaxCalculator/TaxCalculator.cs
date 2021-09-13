@@ -11,6 +11,8 @@ namespace TaxCalculator
     private readonly decimal ProgressiveTaxIncomeFirstValueInPercent;
     private readonly decimal ProgressiveTaxIncomeSecondLimit;
     private readonly decimal ProgressiveTaxIncomeSecondValueInPercent;
+    private readonly decimal ProgressiveTaxIncomeThirdLimit;
+    private readonly decimal ProgressiveTaxIncomeThirdValueInPercent;
 
     public TaxCalculator()
     {
@@ -20,6 +22,8 @@ namespace TaxCalculator
       ProgressiveTaxIncomeFirstValueInPercent = decimal.Parse(config.GetSection("ApplicationSettings").GetSection("ProgressiveTaxIncomeFirstValueInPercent").Value);
       ProgressiveTaxIncomeSecondLimit = decimal.Parse(config.GetSection("ApplicationSettings").GetSection("ProgressiveTaxIncomeSecondLimit").Value);
       ProgressiveTaxIncomeSecondValueInPercent = decimal.Parse(config.GetSection("ApplicationSettings").GetSection("ProgressiveTaxIncomeSecondValueInPercent").Value);
+      ProgressiveTaxIncomeThirdLimit = decimal.Parse(config.GetSection("ApplicationSettings").GetSection("ProgressiveTaxIncomeThirdLimit").Value);
+      ProgressiveTaxIncomeThirdValueInPercent = decimal.Parse(config.GetSection("ApplicationSettings").GetSection("ProgressiveTaxIncomeThirdValueInPercent").Value);
     }
 
     public decimal CalculateTaxIncome(TaxCalculationDetails[] income, TaxAccountingMethodType methodType)
@@ -59,22 +63,30 @@ namespace TaxCalculator
           + "however if youneed to not use 0.00 rate at all you can set ProgressiveTaxIncomeFirstLimit value to 0.");
       }
 
+      var employeeIncome = 0m;
       var taxIncome = 0m;
-      var currentProgressiveTaxIncomeFirstLimit = ProgressiveTaxIncomeFirstLimit;
 
       foreach (var item in income)
       {
-        if (item.Amount < currentProgressiveTaxIncomeFirstLimit)
-        {
-          currentProgressiveTaxIncomeFirstLimit -= item.Amount;
-          continue;
-        }
-
-        taxIncome += item.Amount * ProgressiveTaxIncomeSecondValueInPercent;
-        taxIncome -= currentProgressiveTaxIncomeFirstLimit;
-        currentProgressiveTaxIncomeFirstLimit = 0m;
-        taxIncome = decimal.Round(taxIncome, MidpointRounding.ToZero);
+        employeeIncome += item.Amount;
       }
+
+      if (employeeIncome <= ProgressiveTaxIncomeFirstLimit)
+      {
+        return taxIncome;
+      }
+      else if (employeeIncome <= ProgressiveTaxIncomeSecondLimit)
+      {
+        taxIncome += employeeIncome * ProgressiveTaxIncomeSecondValueInPercent;
+      }
+      else
+      {
+        taxIncome += ProgressiveTaxIncomeSecondLimit * ProgressiveTaxIncomeSecondValueInPercent;
+        taxIncome += (employeeIncome - ProgressiveTaxIncomeSecondLimit) * ProgressiveTaxIncomeThirdValueInPercent;
+      }
+
+      taxIncome -= ProgressiveTaxIncomeFirstLimit;
+      taxIncome = decimal.Round(taxIncome, MidpointRounding.ToZero);
 
       return taxIncome;
     }
