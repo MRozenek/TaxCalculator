@@ -4,6 +4,6 @@ namespace TaxCalculator
 {
   interface ITaxCalculator
   {
-    public decimal CalculateTaxIncome(TaxCalculationDetails[] income, TaxAccountingMethodType methodType);
+    public decimal CalculateTax(TaxCalculationDetails[] income, TaxMethodType taxMethodType);
   }
 }

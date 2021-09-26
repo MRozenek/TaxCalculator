@@ -21,7 +21,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5000m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Free);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Free);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -35,7 +35,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5001m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Flat);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Flat);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -48,7 +48,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5000m, Month = 1, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -61,7 +61,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 300, Month = 1, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -75,7 +75,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 200, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -89,7 +89,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 5000m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -103,7 +103,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 10000m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }
@@ -117,7 +117,7 @@ namespace TaxCalculator.Tests
         new TaxCalculationDetails { Amount = 100000m, Month = 2, Year = 2021 },
       };
 
-      var taxCalculationResult = _cut.CalculateTaxIncome(taxIncomes, TaxAccountingMethodType.Progressive);
+      var taxCalculationResult = _cut.CalculateTax(taxIncomes, TaxMethodType.Progressive);
 
       Assert.Equal(expectedTaxCalculationResult, taxCalculationResult);
     }

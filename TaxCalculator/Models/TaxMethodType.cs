@@ -1,6 +1,6 @@
 ﻿namespace TaxCalculator.Models
 {
-  public enum TaxAccountingMethodType
+  public enum TaxMethodType
   {
     NotSet = 0,
     Free = 1,
