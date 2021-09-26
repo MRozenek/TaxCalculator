@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using TaxCalculator.Models;
+﻿using TaxCalculator.Models;
 using TaxCalculator.Models.TaxMethodTypes;
 
 namespace TaxCalculator
@@ -9,17 +7,11 @@ namespace TaxCalculator
   {    
     public decimal CalculateTax(TaxCalculationDetails[] income, TaxMethodType taxMethodType)
     {
-      switch (taxMethodType)
-      {
-        case TaxMethodType.Free:
-          return new FreeTaxMethodTypeCalculator().CalculateTax(income);
-        case TaxMethodType.Flat:
-          return new FlatTaxMethodTypeCalculator().CalculateTax(income);
-        case TaxMethodType.Progressive:
-          return new ProgressiveTaxMethodTypeCalculator().CalculateTax(income);
-        default:
-          return new NotSetTaxMethodTypeCalculator().CalculateTax(income);
-      }
+      var factory = new TaxMethodTypeCalculatorFactory();
+      var taxCalculator = factory.Create(taxMethodType);
+      var tax = taxCalculator.CalculateTax(income);
+
+      return tax;
     }
   }
 }

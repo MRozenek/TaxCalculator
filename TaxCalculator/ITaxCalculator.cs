@@ -1,4 +1,5 @@
 ﻿using TaxCalculator.Models;
+using TaxCalculator.Models.TaxMethodTypes;
 
 namespace TaxCalculator
 {

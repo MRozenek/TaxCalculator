@@ -1,11 +1,12 @@
 using TaxCalculator.Models;
+using TaxCalculator.Models.TaxMethodTypes;
 using Xunit;
 
 namespace TaxCalculator.Tests
 {
   public class TaxCalculatorTests
   {
-    private TaxCalculator _cut;
+    private readonly TaxCalculator _cut;
 
     public TaxCalculatorTests()
     {

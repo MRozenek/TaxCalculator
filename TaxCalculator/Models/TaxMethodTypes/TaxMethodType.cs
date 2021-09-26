@@ -1,4 +1,4 @@
-﻿namespace TaxCalculator.Models
+﻿namespace TaxCalculator.Models.TaxMethodTypes
 {
   public enum TaxMethodType
   {
